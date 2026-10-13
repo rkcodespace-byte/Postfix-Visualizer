@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postfix Visualizer</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <main class="container">
+        <h1>Postfix Expression Visualizer</h1>
+        <p class="subtitle">Linked-List-Based Stack Evaluation</p>
+
+        <label for="expression">Enter postfix expression</label>
+        <input id="expression" type="text"
+               placeholder="Example: 8 3 - 2 4 * + 6 /">
+
+        <div class="buttons">
+            <button id="evaluateBtn">Evaluate</button>
+            <button id="exampleBtn" class="secondary">Load Example</button>
+            <button id="clearBtn" class="secondary">Clear</button>
+        </div>
+
+        <p id="message" role="status"></p>
+
+        <section class="result-card">
+            <h2>Final Result</h2>
+            <p id="result">—</p>
+        </section>
+
+        <section>
+            <h2>Stack Visualization</h2>
+            <p class="hint">TOP is shown first. Each box represents a linked-list node.</p>
+            <div id="stack" class="stack">
+                <p class="empty">Stack is empty</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Execution Steps</h2>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Step</th>
+                            <th>Token</th>
+                            <th>Operation</th>
+                            <th>Stack (Top → Bottom)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="stepsBody"></tbody>
+                </table>
+            </div>
+            <div class="buttons">
+                <button id="prevBtn" class="secondary" disabled>Previous</button>
+                <button id="nextBtn" class="secondary" disabled>Next</button>
+            </div>
+            <p id="stepCounter">No steps yet</p>
+        </section>
+
+        <section class="info">
+            <h2>Operand Order</h2>
+            <p>For subtraction and division, pop the right operand first,
+            then the left operand. Calculate left operator right.</p>
+            <p>Example: <code>8 3 -</code> means 8 − 3 = 5,
+            not 3 − 8.</p>
+        </section>
+
+        <section class="info">
+            <h2>Complexity Comparison</h2>
+            <p><strong>Linked-list stack:</strong> O(1) push and pop;
+            O(n) total evaluation time; O(n) memory.</p>
+            <p><strong>Array stack:</strong> O(1) push and pop when capacity
+            is available; O(n) total evaluation time; O(n) memory.
+            Arrays may need resizing or a fixed capacity, while linked
+            lists allocate nodes individually.</p>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
